@@ -1,0 +1,7 @@
+Day-1-2
+// made dashboard layout in app folder/components and layout designed
+// installed and used shadcn dilog and tooltip for sidebar Modal
+- inside the sidebar made a list component that will render all the created Organizations
+-Added Item component that will be rendered on the place of upper line for Each Organization/item plus
+    it would choose or set the selected/active Organization
+- Added toolTip component called "Hint" in components that would wrap around the content and tell what to do
