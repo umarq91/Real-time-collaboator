@@ -1,6 +1,6 @@
 "use client"
 import { useOrganization } from "@clerk/nextjs";
-import { EmptyOrg } from "./_components/EmptyOrg";
+import { EmptyOrg } from "./_components/emptyStates/EmptyOrg";
 import { BoardList } from "./_components/board-list";
 
 interface DashBoardProps{
@@ -17,14 +17,13 @@ const DashBoardPage = ({
   const { organization } = useOrganization(); // holds the active organization
 
   return (
-    <div className=" p-6 flex-1 h-[calc(100%-80px)]">
+    <div className="h-[calc(100%-80px)] p-6 flex-1 ">
       {!organization ? <EmptyOrg /> : (
-        <p>
           <BoardList
           orgId={organization.id}
           query={searchParams}
           />
-        </p>
+
       )}
     </div>
   )

@@ -1,6 +1,8 @@
 "use client"
 
-import { EmptySearch } from "./empty-search"
+import { EmptyBoards } from "./emptyStates/empty-boards"
+import { EmptyFavorites } from "./emptyStates/empty-favorits"
+import { EmptySearch } from "./emptyStates/empty-search"
 
 interface boardListProps {
     orgId: string,
@@ -15,26 +17,16 @@ export const BoardList = ({ orgId, query }:boardListProps)=>{
 const data=[] // TODO : changed to API call
 
 if(!data?.length && query.search){
-    return(
-        <EmptySearch/>
-    )
+    return <EmptySearch/>
 }
 
 
 if(!data?.length && query.favorites){
-    return(
-        <div className="">
-            No Favorites
-        </div>
-    )
+    return <EmptyFavorites/>
 }
 
 if(!data?.length){
-    return(
-        <div className="">
-            No Boards at all
-        </div>
-    )
+    return <EmptyBoards/>
 }
 
 return(
