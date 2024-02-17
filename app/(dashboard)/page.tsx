@@ -1,8 +1,10 @@
+import { EmptyOrg } from "./_components/EmptyOrg";
+
 const DashBoardPage = ()=>{
 
   return(
-    <div className="">
-     Dashboad here
+    <div className=" p-6 flex-1 h-[calc(100%-80px)]">
+    <EmptyOrg/>
     </div>
   )
 }
