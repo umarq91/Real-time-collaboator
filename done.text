@@ -17,3 +17,6 @@ Day-1-2
     - added Input and Icon
     - Installed query string and useHooks to get the value from and make it url and push it to url instantly
     - Added inviteMembers 
+
+-- Empty State
+    Made an Empty State for When no board is Selected ! 
