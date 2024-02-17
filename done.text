@@ -9,5 +9,11 @@ Day-1-2
 / day-3
 
 -- Added Organization Bar 
--- added and designed Organization selector ( build in from clerk called organizationSwitcher)
--- Designed and added  TeamBoards adn Favorite Boards Btton
+     added and designed Organization selector ( build in from clerk called organizationSwitcher)
+     Designed and added  TeamBoards adn Favorite Boards Btton
+     it also joins invites and joins the user (through clerk)
+
+-- Navbar
+    - added Input and Icon
+    - Installed query string and useHooks to get the value from and make it url and push it to url instantly
+    - Added inviteMembers 

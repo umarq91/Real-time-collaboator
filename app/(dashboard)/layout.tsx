@@ -1,5 +1,5 @@
 import OrgSideBar from "./_components/OrgSideBar";
-import { Navbar } from "./_components/navbar";
+import { Navbar } from "./_components/navbar/navbar";
 import { Sidebar } from "./_components/sidebar";
 
 interface dashBoardLayourProps{
