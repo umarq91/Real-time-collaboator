@@ -2,23 +2,31 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useOrganization } from "@clerk/nextjs";
+import { useApiMutation } from "@/hooks/use-api-mutation";
+import { toast } from "sonner";
 
 
 export const EmptyBoards = ()=>{
         const {organization} = useOrganization();
 
 
-    const create = useMutation(api.board.create)
+    // const create = useMutation(api.board.create) // instead of creating like and addding loading state
+   const {pending,mutate} =  useApiMutation(api.board.create); // made a loading state and create inside a hook so its re usable
 
     const onclick=()=>{
         if(!organization) return ;
 
-        create({
+        // creates a board
+        mutate({          
+
             orgId:organization.id,
             title:"Untitled"
+        }).then((id)=>{
+            toast.success('Board created!')
+        }).catch(()=>{
+            toast.error("Failed to create board")
         })
     }
 
@@ -37,7 +45,7 @@ export const EmptyBoards = ()=>{
                 Start by creating a board for your organization
             </p>
             <div className="mt-6">
-                <Button onClick={onclick}>
+                <Button disabled={pending} onClick={onclick}>
                 Create board
                 </Button>
             </div>
