@@ -24,4 +24,12 @@ testDay-1-2
 
 
 -day4
-test
+
+-- Create scehema in convex/boards.ts file 
+         Mutation Definition: The create mutation is exported and defined with the following characteristics:
+        Arguments: It takes two arguments, orgId and title, both of which are strings.
+        Handler Function: The core logic is within an asynchronous handler function that:
+        Verifies the user's identity by calling ctx.auth.getUserIdentity(). If no identity is found, it throws an "Unauthorized" error.
+        Selects a random image from the images array.
+        Inserts a new board into the boards database collection with the provided title and orgId, along with the author's ID and name from the user's identity, and the URL of the randomly selected image.
+
