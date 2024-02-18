@@ -10,9 +10,8 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.7",
-    "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
-    "@radix-ui/react-tooltip": "^1.0.7",
+    "@radix-ui/themes": "^2.0.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "convex": "^1.9.0",
