@@ -22,7 +22,7 @@ export const EmptyBoards = ()=>{
         mutate({          
 
             orgId:organization.id,
-            title:"Untitled"
+            title:"Untitled"  // HARDCODED for now
         }).then((id)=>{
             toast.success('Board created!')
         }).catch(()=>{

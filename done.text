@@ -33,3 +33,8 @@ testDay-1-2
         Selects a random image from the images array.
         Inserts a new board into the boards database collection with the provided title and orgId, along with the author's ID and name from the user's identity, and the URL of the randomly selected image.
 
+
+-- Day 5
+
+-- Created APi route to get All Boards from the DB in the convex/boards.ts file 
+-- Designed and Created a UI for Boards in api/components/board-card / installed date-fns for showing time
