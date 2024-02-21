@@ -12,6 +12,8 @@ import { Link2, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { useApiMutation } from "@/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";
+import { ConfirmModal } from "./confirm-modal";
+import { Button } from "./ui/button";
 
 
 
@@ -65,14 +67,20 @@ const{mutate,pending } = useApiMutation(api.board.remove)
                     Copy board link
                 </DropdownMenuItem>
 
-
-                <DropdownMenuItem
-                    className=""
-                    onClick={onDelete}
+        <ConfirmModal
+        header="Delete board?"
+        description="Are you sure you want to delete this board? This action cannot be undone."
+        disabled={pending}
+        onConfirm={onDelete}
+        >
+                <Button variant="ghost"
+                className="p-3 cursor-pointer text-sm w-full justify-start font-normal"
                 >
                     <Trash2 className="h-4 w-4 mr-2" />
-                    Delete board
-                </DropdownMenuItem>
+                    Delete
+                </Button>
+                        </ConfirmModal>
+                    
 
             </DropdownMenuContent>
         </DropdownMenu>

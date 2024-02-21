@@ -38,3 +38,9 @@ testDay-1-2
 
 -- Created APi route to get All Boards from the DB in the convex/boards.ts file 
 -- Designed and Created a UI for Boards in api/components/board-card / installed date-fns for showing time
+
+
+Day-6 
+Made a remove Board APi and used it in the actions component to delete the board
+Made Card actions to "link the board" and "delete the board"
+Made a confirm modal to confirm the delete
