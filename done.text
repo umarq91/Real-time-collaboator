@@ -44,3 +44,11 @@ Day-6
 Made a remove Board APi and used it in the actions component to delete the board
 Made Card actions to "link the board" and "delete the board"
 Made a confirm modal to confirm the delete
+
+
+Day-7
+- created Update API in convex/board for card renaming action
+- setUp Zustand in /store/use-rename-modal
+- created a modal provider in /providers/modal-provider
+
+
