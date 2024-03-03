@@ -32,6 +32,7 @@ export const Actions = ({
     id, title
 }: ActionProps) => {
 const{mutate,pending } = useApiMutation(api.board.remove)
+
 const {onOpen} = useRenameModal();
 
     const onCopyLink = () => {

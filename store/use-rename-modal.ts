@@ -9,7 +9,7 @@ interface IrenameModal {
     onClose: ()=>void;
 }
 
-
+    
 export const useRenameModal = create<IrenameModal>(set=>({
     isOpen:false,
 

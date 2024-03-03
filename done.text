@@ -49,6 +49,8 @@ Made a confirm modal to confirm the delete
 Day-7
 - created Update API in convex/board for card renaming action
 - setUp Zustand in /store/use-rename-modal
-- created a modal provider in /providers/modal-provider
+- created a modal provider in /providers/modal-provider // for programmatically control open and close the modal instead of dialog directly importing
 
+
+-- in the actions , when rename opens , useRenameModal Hook captures the id,title and in rename-modal , It updates it 
 
