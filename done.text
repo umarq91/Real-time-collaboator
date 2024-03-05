@@ -54,3 +54,10 @@ Day-7
 
 -- in the actions , when rename opens , useRenameModal Hook captures the id,title and in rename-modal , It updates it 
 
+
+
+-- Favorite Functionality 
+    - updated Scehema 
+    - made favorite and unfavorite functions in Board
+    - in Card footer , updated onclick of Favorite with toggle!
+    -- todo : we can use native useMutation if useAPiMutaion doesnt work
