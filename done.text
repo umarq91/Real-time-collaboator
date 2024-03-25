@@ -61,3 +61,7 @@ Day-7
     - made favorite and unfavorite functions in Board
     - in Card footer , updated onclick of Favorite with toggle!
     -- todo : we can use native useMutation if useAPiMutaion doesnt work
+
+
+--search query
+    - updated boards-list , boards , favorites 
