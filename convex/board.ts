@@ -27,7 +27,6 @@ export const create = mutation({
 
         const randomImage = images[Math.floor(Math.random()*images.length)]
 
-
         const board  = await ctx.db.insert("boards",{
             title:args.title,
             orgId:args.orgId,
@@ -135,7 +134,7 @@ export const favorite = mutation({
       await ctx.db.insert("userFavorites", {
         userId,
         boardId: board._id,
-        orgId: args.orgId,
+       orgId:args.orgId,
       });
   
       return board;
@@ -154,7 +153,7 @@ export const favorite = mutation({
   
       const board = await ctx.db.get(args.id);
   
-      if (!board) {
+      if(!board){
         throw new Error("Board not found");
       }
   
