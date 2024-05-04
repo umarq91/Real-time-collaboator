@@ -1,3 +1,4 @@
+
 export const Toolbar = () => {
     return(
         <div
@@ -18,6 +19,13 @@ export const Toolbar = () => {
     Redo
 </div>
             </div>
+        </div>
+    )
+}
+
+Toolbar.Skeleton=function ToolbarSkeleton(){
+    return(
+        <div className="absolute top-[50%] -translate-y-[50%] left-2 bg-white rounded-md p-1.5 w-[52px] flex items-center shadow-md h-[350px]">
         </div>
     )
 }

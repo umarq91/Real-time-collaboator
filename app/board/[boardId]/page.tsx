@@ -6,18 +6,16 @@ import { Room } from "@/components/room"
 interface BoardIdPageProps{
     params:{
         boardId:string
-        
     }
 }
+const BoardIdPage = ({params}:BoardIdPageProps) => {
 
-const BoardIdPage = ({
-    params
-}:BoardIdPageProps) => {
 
     
+    
     return (
-        <Room roomId={params.boardId} fallback={<Loading/>}>
-        <Canvas boardId={params.boardId}/>
+        <Room key={params.boardId} fallback={<Loading/>} roomId={params.boardId}>
+            <Canvas boardId={params.boardId}/>
         </Room>
         
     )
