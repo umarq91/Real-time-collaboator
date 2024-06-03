@@ -18,19 +18,21 @@ export async function POST(request: Request) {
 
     const user = await currentUser();
 
+ 
+
     if(!authorization || !user){
-        return new Response("Unauthorized", { status: 401 });
+        return new Response("Unauthorized", { status: 403 });
     }
 
-    console.log("test");
     
-
+    
     const {room} = await  request.json( )
-
+    
     const board = await convex.query(api.board.get,{id:room})
+ 
 
     if(board?.orgId !== authorization.orgId){
-    throw new Response("Unauthorized", { status: 401 });
+    return new Response("Unauthorized", { status: 401 });
     }
 
     const userInfo={
