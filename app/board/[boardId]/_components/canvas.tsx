@@ -2,8 +2,9 @@
 
 import { useSelf } from "@/liveblocks.config";
 import { Info } from "./info";
-import { Participants } from "./participants";
+
 import { Toolbar } from "./toolbar";
+import { Participants } from "./Participants";
 
 interface CavasProps{
     boardId:string
@@ -11,8 +12,8 @@ interface CavasProps{
 
 const Canvas = ({boardId}:CavasProps) => {
    let info = useSelf((me)=>me.info);
-    
-   console.log(info);
+
+
    
     return(
         <main

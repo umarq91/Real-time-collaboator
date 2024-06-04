@@ -2,7 +2,7 @@ import { Loader } from "lucide-react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Info } from "./info";
-import { Participants } from "./participants";
+ import { ParticipantsSkeleton } from "./Participants";
 import { Toolbar } from "./toolbar";
 
 function loading() {
@@ -11,7 +11,7 @@ function loading() {
 
             <Loader  className="w-6 h-6 text-muted-foreground animate-spin"/>
             <Info.Skeleton/>
-    <Participants.Skeleton/>
+    <ParticipantsSkeleton/>
     <Toolbar.Skeleton/>
     </main>
   )
