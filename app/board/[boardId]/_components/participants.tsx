@@ -2,7 +2,7 @@
 
 import { useOthers,useSelf } from "@/liveblocks.config";
 import { UserAvatar } from "./user-avatar";
-import { getRandomColor } from "@/lib/utils";
+import { connectionIdToColor } from "@/lib/utils";
 
 const Max_PARTICIPANTS = 2;
 export const Participants = () => {
@@ -16,7 +16,7 @@ const hasMoreUsers = otherUsers.length > Max_PARTICIPANTS;
     {otherUsers.slice(0, Max_PARTICIPANTS)
     .map(({connectionId,info}) => {
        return <UserAvatar key={connectionId} 
-       borderColor={getRandomColor(connectionId)}
+       borderColor={connectionIdToColor(connectionId)}
         fallback={info?.name?.[0] || "T"}
         src={info?.picture} name={info?.name}/>
         
@@ -27,7 +27,7 @@ const hasMoreUsers = otherUsers.length > Max_PARTICIPANTS;
       <UserAvatar
         fallback={currentUser.info?.name?.[0] || "T"}
         src={currentUser.info?.picture}
-        borderColor={getRandomColor(currentUser.connectionId)}
+        borderColor={connectionIdToColor(currentUser.connectionId)}
 
         name={`${currentUser.info?.name} (You)`}/>
     )}
@@ -36,7 +36,7 @@ const hasMoreUsers = otherUsers.length > Max_PARTICIPANTS;
 {hasMoreUsers && (
     <UserAvatar
     name={`+${otherUsers.length - Max_PARTICIPANTS} More`}
-    borderColor={getRandomColor(currentUser.connectionId)}
+    borderColor={connectionIdToColor(currentUser.connectionId)}
     fallback={`+${otherUsers.length - Max_PARTICIPANTS}`}
     />
 )}
