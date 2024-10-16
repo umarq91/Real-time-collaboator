@@ -4,7 +4,7 @@ import { Layer, XYWH } from "@/types/canvas";
 
 import { useStorage, useSelf } from "@/liveblocks.config";
 
-const boundingBox = (layers: Layer[]) => {
+const boundingBox = (layers: Layer[]):XYWH | null => {
   const first = layers[0];
 
   if (!first) {
@@ -35,14 +35,15 @@ const boundingBox = (layers: Layer[]) => {
         bottom=y+height
     }
 
-    return {
-        x:left,
-        y:top,
-        width:right-left,
-        height:bottom-top
-    }
+  
 
   }
+  return {
+    x:left,
+    y:top,
+    width:right-left,
+    height:bottom-top
+}
 };
 
 

@@ -196,7 +196,7 @@ onPointerLeave={onPointerLeave}
       />
     ))}
     <SelectionBox
-onResizeHandlePointerDown={()=>{}}
+  onResizeHandlePointerDown={()=>{}}
     />
         <CursorsPresnce/>
     </g>
