@@ -8,16 +8,17 @@ import { useHistory, useSelf,useCanRedo,useCanUndo,
 import { Info } from "./info";
 import {nanoid} from "nanoid"
 
-import { Camera, CanvasMode, CanvasState, Color, LayerType,Point } from "@/types/canvas";
+import { Camera, CanvasMode, CanvasState, Color, LayerType,Point, Side, XYWH } from "@/types/canvas";
 
 import { Toolbar } from "./toolbar";
 import { Participants } from "./Participants";
 import React, { useCallback, useMemo, useState } from "react";
 import { CursorsPresnce } from "./cursors-presnce";
-import { connectionIdToColor, pointerEventToCanvasPoint } from "@/lib/utils";
+import { connectionIdToColor, pointerEventToCanvasPoint, resizeBounds } from "@/lib/utils";
 import { LiveObject } from "@liveblocks/client";
 import { LayerPreview } from "./layer-preview";
 import { SelectionBox } from "./selection-box";
+import { set } from "date-fns";
 
 
 const MAX_LAYERS =100;
@@ -62,6 +63,28 @@ const [lastUsedColor,setLastUsedColor] = useState<Color>({
         [lastUsedColor]
     );
 
+const resizeSelectedLayer = useMutation((
+  {storage,self},
+  point:Point
+)=>{
+if(canvasState.mode!==CanvasMode.Resizing){
+  return;
+}
+
+const bounds = resizeBounds(
+  canvasState.initialBounds,
+  canvasState.corner,
+  point
+)
+
+const liveLayers  = storage.get("layers")
+const layer = liveLayers.get(self.presence.selection[0]);
+
+if(layer){
+  layer.update(bounds)
+}
+},[canvasState])
+
 
 // it won't be including layertype.pen becuase it will run its own insert function
 
@@ -69,6 +92,19 @@ const history = useHistory();
 const canRedo = useCanRedo();
 const canUndo = useCanUndo();
 
+
+const onResizeHandlerPointerDown = useCallback((
+  corner:Side,
+  initialBounds:XYWH
+)=>{
+  
+history.pause();
+setCanvasState({
+  mode:CanvasMode.Resizing,
+  initialBounds,
+  corner
+})
+},[history])
 
 const onWheel = useCallback((e:React.WheelEvent)=>{
     setCamera((camera)=>({
@@ -83,12 +119,15 @@ const onPointerMove = useMutation(
 
     const current = pointerEventToCanvasPoint(e,camera);
 
-
+if(canvasState.mode===CanvasMode.Resizing){
+  resizeSelectedLayer(current)
+  
+}
 
     
     setMyPresence({ cursor: current });
   },
-  []
+  [canvasState , resizeSelectedLayer,camera] 
 );
 
 const onPointerLeave = useMutation(
@@ -196,7 +235,7 @@ onPointerLeave={onPointerLeave}
       />
     ))}
     <SelectionBox
-  onResizeHandlePointerDown={()=>{}}
+   onResizeHandlePointerDown={onResizeHandlerPointerDown}
     />
         <CursorsPresnce/>
     </g>
