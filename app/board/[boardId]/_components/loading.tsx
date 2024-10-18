@@ -2,7 +2,7 @@ import { Loader } from "lucide-react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Info } from "./info";
- import { ParticipantsSkeleton } from "./Participants";
+ import { ParticipantsSkeleton } from "./participants";
 import { Toolbar } from "./toolbar";
 
 function loading() {

@@ -19,7 +19,7 @@ import { LayerPreview } from "./layer-preview";
 import { SelectionBox } from "./selection-box";
 import { set } from "date-fns";
 import { SelectionTools } from "./selection-tools";
-import { Participants } from "./Participants";
+import { Participants } from "./participants";
 
 
 const MAX_LAYERS =100;
