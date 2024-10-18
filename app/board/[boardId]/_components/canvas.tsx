@@ -11,7 +11,6 @@ import {nanoid} from "nanoid"
 import { Camera, CanvasMode, CanvasState, Color, LayerType,Point, Side, XYWH } from "@/types/canvas";
 
 import { Toolbar } from "./toolbar";
-import { Participants } from "./Participants";
 import React, { useCallback, useMemo, useState } from "react";
 import { CursorsPresnce } from "./cursors-presnce";
 import { connectionIdToColor, findIntersectingLayersWithRectangle, pointerEventToCanvasPoint, resizeBounds } from "@/lib/utils";
@@ -20,6 +19,7 @@ import { LayerPreview } from "./layer-preview";
 import { SelectionBox } from "./selection-box";
 import { set } from "date-fns";
 import { SelectionTools } from "./selection-tools";
+import { Participants } from "./Participants";
 
 
 const MAX_LAYERS =100;
