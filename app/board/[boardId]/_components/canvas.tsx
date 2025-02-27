@@ -27,6 +27,7 @@ import { Toolbar } from "./toolbar";
 import React, { useCallback, useMemo, useState } from "react";
 import { CursorsPresnce } from "./cursors-presnce";
 import {
+  colorToCss,
   connectionIdToColor,
   findIntersectingLayersWithRectangle,
   penPointsToPathLayers,
@@ -39,6 +40,7 @@ import { SelectionBox } from "./selection-box";
 import { set } from "date-fns";
 import { SelectionTools } from "./selection-tools";
 import { Participants } from "./participants";
+import { Path } from "./paths";
 
 const MAX_LAYERS = 100;
 interface CavasProps {
@@ -48,6 +50,7 @@ interface CavasProps {
 const Canvas = ({ boardId }: CavasProps) => {
   //    let info = useSelf((me)=>me.info);
   const layerIds = useStorage((root) => root.layerIds);
+  const pencilDraft = useSelf((me) => me.presence.pencilDraft);
   const [canvasState, setCanvasState] = useState<CanvasState>({
     mode: CanvasMode.None,
   });
@@ -180,32 +183,33 @@ const Canvas = ({ boardId }: CavasProps) => {
     [canvasState.mode]
   );
 
-  const insertPath = useMutation(({ storage, self, setMyPresence }) => {
-    const liveLyaers = storage.get("layers");
-    const { pencilDraft } = self.presence;
+  const insertPath = useMutation(
+    ({ storage, self, setMyPresence }) => {
+      const liveLyaers = storage.get("layers");
+      const { pencilDraft } = self.presence;
 
-    if (
-      pencilDraft == null ||
-      pencilDraft.length < 2 ||
-      liveLyaers.size >= MAX_LAYERS
-    ) {
+      if (
+        pencilDraft == null ||
+        pencilDraft.length < 2 ||
+        liveLyaers.size >= MAX_LAYERS
+      ) {
+        setMyPresence({ pencilDraft: null });
+        return;
+      }
+
+      const id = nanoid();
+      liveLyaers.set(
+        id,
+        new LiveObject(penPointsToPathLayers(pencilDraft, lastUsedColor))
+      );
+      const liveLayerIds = storage.get("layerIds");
+      liveLayerIds.push(id);
+
       setMyPresence({ pencilDraft: null });
-      return;
-    }
-
-    const id = nanoid();
-    liveLyaers.set(
-      id,
-      new LiveObject(penPointsToPathLayers(pencilDraft, lastUsedColor))
-    );
-    const liveLayerIds = storage.get("layerIds");
-    liveLayerIds.push(id);
-
-    setMyPresence({ pencilDraft: null });
-    setCanvasState({ mode: CanvasMode.Pencil });
-  }, [lastUsedColor]);
-
-
+      setCanvasState({ mode: CanvasMode.Pencil });
+    },
+    [lastUsedColor]
+  );
 
   const startDrawing = useMutation(
     ({ setMyPresence }, point: Point, pressure: number) => {
@@ -293,7 +297,6 @@ const Canvas = ({ boardId }: CavasProps) => {
       translateSelectedLayers,
       startMultiSelection,
       updateSelectionNet,
-
     ]
   );
   const onPointerLeave = useMutation(
@@ -440,6 +443,14 @@ const Canvas = ({ boardId }: CavasProps) => {
               />
             )}
           <CursorsPresnce />
+          {pencilDraft != null && pencilDraft.length > 0 && (
+            <Path
+              points={pencilDraft}
+              fill={colorToCss(lastUsedColor)}
+              x={0}
+              y={0}
+            />
+          )}
         </g>
       </svg>
     </main>
