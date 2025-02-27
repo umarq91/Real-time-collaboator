@@ -1,16 +1,16 @@
-import { createClient,
-LiveMap,
-LiveList,
-LiveObject
- } from "@liveblocks/client";
+import {
+  createClient,
+  LiveMap,
+  LiveList,
+  LiveObject,
+} from "@liveblocks/client";
 import { createRoomContext, createLiveblocksContext } from "@liveblocks/react";
-  
-import { Layer,Color} from '@/types/canvas'
 
+import { Layer, Color } from "@/types/canvas";
 
 const client = createClient({
   // publicApiKey: "pk_dev_Ej0M_Um89ZAPSfEjsva9zLHBxTjonniJlryd_OpJo6m5ykOetvWD3zc2qWazafor",
-  throttle:16,
+  throttle: 16,
   authEndpoint: "/api/liveblocks-auth",
 });
 
@@ -18,8 +18,10 @@ const client = createClient({
 // and that will automatically be kept in sync. Accessible through the
 // `user.presence` property. Must be JSON-serializable.
 type Presence = {
-  cursor: { x: number, y: number } | null,
-  selection:string[]
+  cursor: { x: number; y: number } | null;
+  selection: string[];
+  pencilDraft: [x: number, y: number, pressure: number][] | null;
+  penColor: Color | null;
   // ...
 };
 
@@ -28,10 +30,9 @@ type Presence = {
 // LiveList, LiveMap, LiveObject instances, for which updates are
 // automatically persisted and synced to all connected clients.
 type Storage = {
-// author: LiveObject<{ firstName: string, lastName: string }>,
-layers:LiveMap<string,LiveObject<Layer>>;
-layerIds:LiveList<string>
-
+  // author: LiveObject<{ firstName: string, lastName: string }>,
+  layers: LiveMap<string, LiveObject<Layer>>;
+  layerIds: LiveList<string>;
 };
 
 // Optionally, UserMeta represents static/readonly metadata on each user, as
@@ -44,7 +45,7 @@ type UserMeta = {
   info?: {
     name?: string;
     picture?: string;
-  }
+  };
 };
 
 // Optionally, the type of custom events broadcast and listened to in this
@@ -103,12 +104,14 @@ export const {
     useMarkThreadAsRead,
     useRoomNotificationSettings,
     useUpdateRoomNotificationSettings,
-  
+
     // These hooks can be exported from either context
     // useUser,
     // useRoomInfo
-  }
-} = createRoomContext<Presence, Storage, UserMeta, RoomEvent, ThreadMetadata>(client);
+  },
+} = createRoomContext<Presence, Storage, UserMeta, RoomEvent, ThreadMetadata>(
+  client
+);
 
 // Project-level hooks, use inside `LiveblocksProvider`
 export const {
@@ -118,9 +121,9 @@ export const {
     useMarkAllInboxNotificationsAsRead,
     useInboxNotifications,
     useUnreadInboxNotificationsCount,
-  
+
     // These hooks can be exported from either context
     useUser,
     useRoomInfo,
-  }
+  },
 } = createLiveblocksContext<UserMeta, ThreadMetadata>(client);
